@@ -85,14 +85,58 @@ function run(){
 }
 
 function fight(){
+    if (life > 3){
+        if (awake === true){
+            life -= 3;
+            log(nom + " se bat");
+            displayStatus(life,money,"awake");
+        }
+        else {
+            log("Action fight impossible : "+ nom +" dort");
+        }
+    }
+    else{
+        if (life > 0){
+            log("Action fight impossible : "+ nom +" est mort");
+        }
+        log("Action fight impossible : "+ nom +" pas assez de vie");
+    }
 
 }
 
 function work(){
+    if (life > 0){
+        if (awake === true){
+            life--;
+            money += 2
+            log(nom + " travaille");
+            displayStatus(life,money,"awake");
+        }
+        else {
+            log("Action run impossible : "+ nom +" dort");
+        }
+    }
+    else{
+        log("Action run impossible : "+ nom +" pas assez de vie");
+    }
 
 }
 
 function eat(){
+    if (life > 0){
+        if (awake === true){
+            life--;
+            money += 2
+            log(nom + " travaille");
+            displayStatus(life,money,"awake");
+        }
+        else {
+            log("Action run impossible : "+ nom +" dort");
+        }
+    }
+    else{
+        log("Action run impossible : "+ nom +" pas assez de vie");
+    }
 
 }
 
