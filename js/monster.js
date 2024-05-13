@@ -1,5 +1,3 @@
-// variables globales
-
 var nom;
 var life;
 var money;
@@ -49,12 +47,16 @@ function log(message) {
 }
 
 function displayStatus(life, money, awake) {
-    let icon;
+    let emoji;
     let estawake = "Pas réveillé";
     if (awake === true){
         estawake = "Réveillé"
     }
-    statusbox.innerHTML = "<li>Life : " + life + "❤️</li><li>Money : " +money+ "💸</li><li>" + estawake + "</li>";
+    let argent = "💸".repeat(money/10)
+    if (argent === ""){
+        argent = "😟"
+    }
+    statusbox.innerHTML = "<li>Life : " + life + "❤️</li><li>Money : " +money+ argent+"</li><li>" + estawake + "</li>";
     if (life <= 0) {
         monstrebox.style.backgroundColor = "black";
         monstrebox.querySelector("p").textContent = "☠️";
@@ -62,26 +64,23 @@ function displayStatus(life, money, awake) {
     else{
         if (life < 5) {
             monstrebox.style.backgroundColor = "red";
-            icon = "😢";
+            emoji = "😢";
         } else if (life < 10) {
             monstrebox.style.backgroundColor = "orange";
-            icon = "😕";
+            emoji = "😕";
         } else if (life < 15) {
             monstrebox.style.backgroundColor = "blue";
-            icon = "😐";
+            emoji = "😐";
         } else {
             monstrebox.style.backgroundColor = "green";
-            icon = "😄";
+            emoji = "😄";
         }
         if (!awake){
-            icon = "🛏️";
+            emoji = "🛏️";
         }
-        monstrebox.querySelector("p").textContent = `${nom}\n${icon}`;
+        monstrebox.querySelector("p").textContent = `${nom}\n${emoji}`;
     }
-
     tremblement();
-
-
 }
 
 
