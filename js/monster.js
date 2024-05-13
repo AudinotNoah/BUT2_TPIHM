@@ -20,8 +20,8 @@ var actionbox = document.getElementById("actionbox");
 var statusbox = document.getElementById("status")
 var monstrebox = document.getElementById("monster");
 
-var temps_dormir = 7000;
-var temps_random = 12000;
+const TEMPS_DORMIR = 7000;
+const TEMPS_RANDOM = 12000;
 
 function init(n, l, m){
     nom = n;
@@ -71,7 +71,10 @@ function displayStatus(life, money, awake) {
             icon = "😐";
         } else {
             monstrebox.style.backgroundColor = "green";
-            icon = "😄"
+            icon = "😄";
+        }
+        if (!awake){
+            icon = "🛏️";
         }
         monstrebox.querySelector("p").textContent = `${nom}\n${icon}`;
     }
@@ -125,18 +128,20 @@ function eat() {
 }
 
 function sleep() {
-    if (awake) {
+    if (life > 0 && awake) {
         awake = false;
         log(nom + " s'endort.🛏️");
         displayStatus(life, money, awake);
         setTimeout(function() {
-            awake = true;
-            life += 1;
-            log(nom + " se réveille (+1 life❤️)");
-            displayStatus(life, money, awake);
-        }, temps_dormir);
+            if (life > 0 ){
+                awake = true;
+                life += 1;
+                log(nom + " se réveille (+1 life❤️)");
+                displayStatus(life, money, awake); 
+            }
+        }, TEMPS_DORMIR);
     } else {
-        log(nom + " est déja entrain de dormir.");
+        log(nom + " ne peut pas de dormir.");
     }
 }
 
@@ -200,4 +205,4 @@ b3_fight.addEventListener("click",fight);
 b4_sleep.addEventListener("click",sleep);
 b5_eat.addEventListener("click",eat);
 b7_work.addEventListener("click",work);
-setInterval(hasard, temps_random);
+setInterval(hasard, TEMPS_RANDOM);
